@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+    <script src="../build/browser.min.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        var Child = React.createClass({
+            render: function(){
+                var Data = this.props.data;
+                var row = [],
+                    key = 1;
+                Data.map(function(ele){
+                    row.push(<li key={++key}>My name is {ele.name},I am {ele.age} old</li>);
+                });
+                return (
+                    <ul>
+                       {row}
+                    </ul>
+                )
+            }
+        });
+        var Parent = React.createClass({
+            getInitialState: function(){
+                return {
+                    data : [
+                        {'name':'aaa','age':15},
+                        {'name':'bbb','age':16},
+                        {'name':'ccc','age':17},
+                        {'name':'ddd','age':18},
+                        {'name':'eee','age':19}
+                    ]
+                }
+            },
+            render: function(){
+                return(
+                    <Child data={this.state.data} />
+                )
+            }
+        });
+        ReactDOM.render(
+            <Parent/>,
+            document.getElementById('container')
+        )
+    </script>
+</body>
+</html>
